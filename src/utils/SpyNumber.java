@@ -2,7 +2,16 @@ package utils;
 
 import java.util.Scanner;
 
+/**
+ * The SpyNumber class provides a command-line interface for users to check if a given natural number is a Spy number.
+ * A Spy number is a number where the sum of its digits equals the product of its digits.
+ */
 public class SpyNumber {
+    /**
+     * The main method is the entry point of the program. It handles user input and checks if the number is a Spy number.
+     *
+     * @param args Command-line arguments (not used).
+     */
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
@@ -106,6 +115,13 @@ public class SpyNumber {
         }
     }
 
+    /**
+     * Checks if the given number has the specified property.
+     *
+     * @param number The number to check.
+     * @param property The property to check.
+     * @return true if the number has the property, false otherwise.
+     */
     private static boolean hasProperty(long number, String property) {
         return switch (property) {
             case "EVEN" -> number % 2 == 0;
@@ -121,10 +137,19 @@ public class SpyNumber {
         };
     }
 
+    /**
+     * Checks if the given property is valid.
+     *
+     * @param property The property to check.
+     * @return true if the property is valid, false otherwise.
+     */
     private static boolean isValidProperty(String property) {
         return property.equals("EVEN") || property.equals("ODD") || property.equals("BUZZ") || property.equals("DUCK") || property.equals("PALINDROMIC") || property.equals("GAPFUL") || property.equals("SPY");
     }
 
+    /**
+     * Prints the instructions for using the program.
+     */
     private static void printInstructions() {
         System.out.println("Supported requests:");
         System.out.println("- enter a natural number to know its properties;");
@@ -137,6 +162,12 @@ public class SpyNumber {
         System.out.println();
     }
 
+    /**
+     * Prints the properties of the given number.
+     *
+     * @param number The number to process.
+     * @param singleLine Whether to print the properties in a single line or multiple lines.
+     */
     private static void printProperties(long number, boolean singleLine) {
         boolean isEven = number % 2 == 0;
         boolean isOdd = !isEven;
@@ -169,6 +200,12 @@ public class SpyNumber {
         }
     }
 
+    /**
+     * Checks if the given number is a spy number.
+     *
+     * @param number The number to check.
+     * @return true if the number is a spy number, false otherwise.
+     */
     private static boolean isSpy(long number) {
         String numberStr = String.valueOf(number);
         int sum = 0;

@@ -2,6 +2,10 @@ package utils;
 
 import java.util.*;
 
+/**
+ * The JumpingNumber class provides a command-line interface for users to check if a given natural number is a Jumping number.
+ * A Jumping number is a number in which the adjacent digits differ by 1.
+ */
 public class JumpingNumber {
     private static final Set<String> AVAILABLE_PROPERTIES = new HashSet<>(Arrays.asList(
             "EVEN", "ODD", "BUZZ", "DUCK", "PALINDROMIC", "GAPFUL", "SPY", "SQUARE", "SUNNY", "JUMPING"
@@ -13,6 +17,11 @@ public class JumpingNumber {
             Set.of("SUNNY", "SQUARE")
     ));
 
+    /**
+     * The main method is the entry point of the program. It handles user input and checks if the number is a Jumping number.
+     *
+     * @param args Command-line arguments (not used).
+     */
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
@@ -131,6 +140,12 @@ public class JumpingNumber {
         }
     }
 
+    /**
+     * Checks if the given sets of properties contain any mutually exclusive properties.
+     *
+     * @param properties The set of properties to check.
+     * @return true if there are mutually exclusive properties, false otherwise.
+     */
     private static boolean hasMutuallyExclusiveProperties(Set<String> properties) {
         for (Set<String> pair : MUTUALLY_EXCLUSIVE_PROPERTIES) {
             if (properties.containsAll(pair)) {
@@ -140,6 +155,13 @@ public class JumpingNumber {
         return false;
     }
 
+    /**
+     * Checks if the given number has all the specified properties.
+     *
+     * @param number The number to check.
+     * @param properties The set of properties to check.
+     * @return true if the number has all the properties, false otherwise.
+     */
     private static boolean hasAllProperties(long number, Set<String> properties) {
         for (String property : properties) {
             if (!hasProperty(number, property)) {
@@ -149,6 +171,13 @@ public class JumpingNumber {
         return true;
     }
 
+    /**
+     * Checks if the given number has the specified property.
+     *
+     * @param number The number to check.
+     * @param property The property to check.
+     * @return true if the number has the property, false otherwise.
+     */
     private static boolean hasProperty(long number, String property) {
         return switch (property) {
             case "EVEN" -> number % 2 == 0;
@@ -167,6 +196,12 @@ public class JumpingNumber {
         };
     }
 
+    /**
+     * Checks if the given number is a spy number.
+     *
+     * @param number The number to check.
+     * @return true if the number is a spy number, false otherwise.
+     */
     private static boolean isSpy(long number) {
         String numberStr = String.valueOf(number);
         int sum = 0;
@@ -179,15 +214,33 @@ public class JumpingNumber {
         return sum == product;
     }
 
+    /**
+     * Checks if the given number is a square number.
+     *
+     * @param number The number to check.
+     * @return true if the number is a square number, false otherwise.
+     */
     private static boolean isSquare(long number) {
         long sqrt = (long) Math.sqrt(number);
         return sqrt * sqrt == number;
     }
 
+    /**
+     * Checks if the given number is a sunny number.
+     *
+     * @param number The number to check.
+     * @return true if the number is a sunny number, false otherwise.
+     */
     private static boolean isSunny(long number) {
         return isSquare(number + 1);
     }
 
+    /**
+     * Checks if the given number is a jumping number.
+     *
+     * @param number The number to check.
+     * @return true if the number is a jumping number, false otherwise.
+     */
     private static boolean isJumping(long number) {
         String numStr = String.valueOf(number);
         for (int i = 1; i < numStr.length(); i++) {
@@ -199,6 +252,9 @@ public class JumpingNumber {
         return true;
     }
 
+    /**
+     * Prints the instructions for using the program.
+     */
     private static void printInstructions() {
         System.out.println("Supported requests:");
         System.out.println("- enter a natural number to know its properties;");
@@ -211,6 +267,12 @@ public class JumpingNumber {
         System.out.println();
     }
 
+    /**
+     * Prints the properties of the given number.
+     *
+     * @param number The number to process.
+     * @param singleLine Whether to print the properties in a single line or multiple lines.
+     */
     private static void printProperties(long number, boolean singleLine) {
         boolean isEven = number % 2 == 0;
         boolean isOdd = !isEven;

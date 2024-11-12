@@ -2,6 +2,11 @@ package utils;
 
 import java.util.*;
 
+/**
+ * The HappyAndSadNumber class provides a command-line interface for users to check if a given natural number is a Happy or Sad number.
+ * A Happy number is a number which eventually reaches 1 when replaced by the sum of the square of each digit.
+ * A Sad number is a number that does not reach 1 and ends up in a cycle when replaced by the sum of the square of each digit.
+ */
 public class HappyAndSadNumber {
     private static final Set<String> AVAILABLE_PROPERTIES = new HashSet<>(Arrays.asList(
             "EVEN", "ODD", "BUZZ", "DUCK", "PALINDROMIC", "GAPFUL", "SPY", "SQUARE", "SUNNY", "JUMPING", "HAPPY", "SAD"
@@ -14,6 +19,11 @@ public class HappyAndSadNumber {
             Set.of("HAPPY", "SAD")
     ));
 
+    /**
+     * The main method is the entry point of the program. It handles user input and checks if the number is a Happy or Sad number.
+     *
+     * @param args Command-line arguments (not used).
+     */
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
@@ -142,6 +152,13 @@ public class HappyAndSadNumber {
         }
     }
 
+    /**
+     * Checks if the given sets of properties contain any mutually exclusive properties.
+     *
+     * @param properties The set of properties to check.
+     * @param excludedProperties The set of excluded properties to check.
+     * @return true if there are mutually exclusive properties, false otherwise.
+     */
     private static boolean hasMutuallyExclusiveProperties(Set<String> properties, Set<String> excludedProperties) {
         for (Set<String> pair : MUTUALLY_EXCLUSIVE_PROPERTIES) {
             if (properties.containsAll(pair) || excludedProperties.containsAll(pair)) {
@@ -157,6 +174,13 @@ public class HappyAndSadNumber {
         return false;
     }
 
+    /**
+     * Checks if the given number has all the specified properties.
+     *
+     * @param number The number to check.
+     * @param properties The set of properties to check.
+     * @return true if the number has all the properties, false otherwise.
+     */
     private static boolean hasAllProperties(long number, Set<String> properties) {
         for (String property : properties) {
             if (!hasProperty(number, property)) {
@@ -166,6 +190,13 @@ public class HappyAndSadNumber {
         return true;
     }
 
+    /**
+     * Checks if the given number has any of the excluded properties.
+     *
+     * @param number The number to check.
+     * @param excludedProperties The set of excluded properties to check.
+     * @return true if the number has any of the excluded properties, false otherwise.
+     */
     private static boolean hasAnyExcludedProperties(long number, Set<String> excludedProperties) {
         for (String property : excludedProperties) {
             if (hasProperty(number, property)) {
@@ -175,6 +206,13 @@ public class HappyAndSadNumber {
         return false;
     }
 
+    /**
+     * Checks if the given number has the specified property.
+     *
+     * @param number The number to check.
+     * @param property The property to check.
+     * @return true if the number has the property, false otherwise.
+     */
     private static boolean hasProperty(long number, String property) {
         return switch (property) {
             case "EVEN" -> number % 2 == 0;
@@ -193,6 +231,12 @@ public class HappyAndSadNumber {
         };
     }
 
+    /**
+     * Checks if the given number is a spy number.
+     *
+     * @param number The number to check.
+     * @return true if the number is a spy number, false otherwise.
+     */
     private static boolean isSpy(long number) {
         String numberStr = String.valueOf(number);
         int sum = 0;
@@ -205,15 +249,33 @@ public class HappyAndSadNumber {
         return sum == product;
     }
 
+    /**
+     * Checks if the given number is a square number.
+     *
+     * @param number The number to check.
+     * @return true if the number is a square number, false otherwise.
+     */
     private static boolean isSquare(long number) {
         long sqrt = (long) Math.sqrt(number);
         return sqrt * sqrt == number;
     }
 
+    /**
+     * Checks if the given number is a sunny number.
+     *
+     * @param number The number to check.
+     * @return true if the number is a sunny number, false otherwise.
+     */
     private static boolean isSunny(long number) {
         return isSquare(number + 1);
     }
 
+    /**
+     * Checks if the given number is a jumping number.
+     *
+     * @param number The number to check.
+     * @return true if the number is a jumping number, false otherwise.
+     */
     private static boolean isJumping(long number) {
         String numStr = String.valueOf(number);
         for (int i = 1; i < numStr.length(); i++) {
@@ -225,6 +287,12 @@ public class HappyAndSadNumber {
         return true;
     }
 
+    /**
+     * Checks if the given number is a happy number.
+     *
+     * @param number The number to check.
+     * @return true if the number is a happy number, false otherwise.
+     */
     private static boolean isHappy(long number) {
         Set<Long> seen = new HashSet<>();
         while (number != 1 && !seen.contains(number)) {
@@ -234,6 +302,12 @@ public class HappyAndSadNumber {
         return number == 1;
     }
 
+    /**
+     * Calculates the sum of the squares of the digits of the given number.
+     *
+     * @param number The number to process.
+     * @return The sum of the squares of the digits.
+     */
     private static long sumOfSquaresOfDigits(long number) {
         long sum = 0;
         while (number > 0) {
@@ -244,6 +318,9 @@ public class HappyAndSadNumber {
         return sum;
     }
 
+    /**
+     * Prints the instructions for using the program.
+     */
     private static void printInstructions() {
         System.out.println("Supported requests:");
         System.out.println("- enter a natural number to know its properties;");
@@ -257,6 +334,12 @@ public class HappyAndSadNumber {
         System.out.println();
     }
 
+    /**
+     * Prints the properties of the given number.
+     *
+     * @param number The number to process.
+     * @param singleLine Whether to print the properties in a single line or multiple lines.
+     */
     private static void printProperties(long number, boolean singleLine) {
         boolean isEven = number % 2 == 0;
         boolean isOdd = !isEven;

@@ -1,6 +1,15 @@
 package utils;
 
+/**
+ * The PalindromicNumber class provides a command-line interface for users to check if a given natural number is a Palindromic number.
+ * A Palindromic number is a number that remains the same when its digits are reversed.
+ */
 public class PalindromicNumber {
+    /**
+     * The main method is the entry point of the program. It handles user input and checks if the number is a Palindromic number.
+     *
+     * @param args Command-line arguments (not used).
+     */
     public static void main(String[] args) {
         System.out.println("Welcome to Amazing Numbers!");
         System.out.println();

@@ -2,7 +2,16 @@ package utils;
 
 import java.util.Scanner;
 
+/**
+ * The GapfulNumber class provides a command-line interface for users to check if a given natural number is a Gapful number.
+ * A Gapful number is a number that is at least three digits long and is divisible by the number formed by its first and last digits.
+ */
 public class GapfulNumber {
+    /**
+     * The main method is the entry point of the program. It handles user input and checks if the number is a Gapful number.
+     *
+     * @param args Command-line arguments (not used).
+     */
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
@@ -79,6 +88,12 @@ public class GapfulNumber {
         }
     }
 
+    /**
+     * Prints the properties of the given number.
+     *
+     * @param number The number to process.
+     * @param singleLine Whether to print the properties in a single line or multiple lines.
+     */
     private static void printProperties(long number, boolean singleLine) {
         boolean isEven = number % 2 == 0;
         boolean isOdd = !isEven;

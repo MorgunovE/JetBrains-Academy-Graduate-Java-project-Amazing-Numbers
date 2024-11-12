@@ -1,8 +1,16 @@
 package utils;
 
+/**
+ * The DuckNumber class provides a command-line interface for users to check if a given natural number is a Duck number.
+ * A Duck number is a number that contains at least one zero in it, but the number should not start with zero.
+ */
 public class DuckNumber {
+    /**
+     * The main method is the entry point of the program. It handles user input and checks if the number is a Duck number.
+     *
+     * @param args Command-line arguments (not used).
+     */
     public static void main(String[] args) {
-
         int number = NaturalNumber.getNaturalNumber();
         if (number == -1) {
             return;
