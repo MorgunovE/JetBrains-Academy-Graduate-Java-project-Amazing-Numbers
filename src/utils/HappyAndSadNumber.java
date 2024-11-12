@@ -102,26 +102,24 @@ public class HappyAndSadNumber {
                     }
 
                     List<String> invalidProperties = new ArrayList<>();
-
                     for (String property : properties) {
                         if (!AVAILABLE_PROPERTIES.contains(property)) {
                             invalidProperties.add(property);
                         }
                     }
-
                     for (String property : excludedProperties) {
                         if (!AVAILABLE_PROPERTIES.contains(property)) {
-                            invalidProperties.add("-" + property);
+                            invalidProperties.add(property);
                         }
                     }
 
-                    if(!invalidProperties.isEmpty()) {
+                    if (!invalidProperties.isEmpty()) {
                         System.out.println("The property " + invalidProperties + " is wrong.");
                         System.out.println("Available properties: " + AVAILABLE_PROPERTIES);
                         continue;
                     }
 
-                    if(hasMutuallyExclusiveProperties(properties, excludedProperties)) {
+                    if (hasMutuallyExclusiveProperties(properties, excludedProperties)) {
                         System.out.println("The request contains mutually exclusive properties: " + properties + " and " + excludedProperties);
                         System.out.println("There are no numbers with these properties.");
                         continue;
@@ -130,7 +128,7 @@ public class HappyAndSadNumber {
                     int found = 0;
                     long number = start;
                     while (found < count) {
-                        if(hasAllProperties(number, properties) && !hasAllProperties(number, excludedProperties)) {
+                        if (hasAllProperties(number, properties) && !hasAnyExcludedProperties(number, excludedProperties)) {
                             printProperties(number, true);
                             found++;
                         }
@@ -140,7 +138,6 @@ public class HappyAndSadNumber {
                 } catch (NumberFormatException e) {
                     System.out.println("The first parameter should be a natural number or zero.");
                 }
-
             }
         }
     }
@@ -184,10 +181,8 @@ public class HappyAndSadNumber {
             case "ODD" -> number % 2 != 0;
             case "BUZZ" -> number % 7 == 0 || number % 10 == 7;
             case "DUCK" -> String.valueOf(number).contains("0");
-            case "PALINDROMIC" ->
-                    new StringBuilder(String.valueOf(number)).reverse().toString().equals(String.valueOf(number));
-            case "GAPFUL" ->
-                    number >= 100 && number % Integer.parseInt("" + String.valueOf(number).charAt(0) + String.valueOf(number).charAt(String.valueOf(number).length() - 1)) == 0;
+            case "PALINDROMIC" -> new StringBuilder(String.valueOf(number)).reverse().toString().equals(String.valueOf(number));
+            case "GAPFUL" -> number >= 100 && number % Integer.parseInt("" + String.valueOf(number).charAt(0) + String.valueOf(number).charAt(String.valueOf(number).length() - 1)) == 0;
             case "SPY" -> isSpy(number);
             case "SQUARE" -> isSquare(number);
             case "SUNNY" -> isSunny(number);
@@ -234,7 +229,6 @@ public class HappyAndSadNumber {
         Set<Long> seen = new HashSet<>();
         while (number != 1 && !seen.contains(number)) {
             seen.add(number);
-            long sum = 0;
             number = sumOfSquaresOfDigits(number);
         }
         return number == 1;
